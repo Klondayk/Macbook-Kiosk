@@ -91,3 +91,9 @@ Telegram/Email notifications for teachers.
 More sensors (door open/close status).
 
 🔹 Demo
+![WhatsApp Image 2025-08-30 at 15 11 00 (1)](https://github.com/user-attachments/assets/a3786fb0-674b-4d68-a2ed-421fe1711342)
+![WhatsApp Image 2025-08-30 at 15 11 00 (2)](https://github.com/user-attachments/assets/1f04407a-8d2d-4c0c-94ed-498e947b9095)
+![WhatsApp Image 2025-08-30 at 15 11 00 (3)](https://github.com/user-attachments/assets/0bd165e9-c3eb-4089-8c16-03b4b63619e0)
+![WhatsApp Image 2025-08-30 at 15 11 00 (4)](https://github.com/user-attachments/assets/b254ce52-c1e3-487e-a6b9-1d74f14e7fbd)
+![WhatsApp Image 2025-08-30 at 15 11 00 (5)](https://github.com/user-attachments/assets/c5e7bef5-75da-47e9-996e-d555df80047d)
+![WhatsApp Image 2025-08-30 at 15 11 00](https://github.com/user-attachments/assets/2b52bd32-2814-44ef-8e5c-3487b8e55527)
