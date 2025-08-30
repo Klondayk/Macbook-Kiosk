@@ -1,0 +1,87 @@
+Пошаговая Настройка нового Raspberry pi для запуска приложения
+
+✅ 1. Обновление системы
+
+sudo apt update && sudo apt upgrade -y
+
+✅ 2. Установка Python 3 и системных зависимостей
+sudo apt install -y python3 python3-pip python3-venv \
+  libpq-dev libffi-dev libssl-dev \
+  build-essential libgtk-3-dev \
+  libwebkit2gtk-4.0-dev
+
+✅ 3. Установка pipx
+python3 -m pip install --user pipx
+python3 -m pipx ensurepath
+
+✅ 4. Установка зависимостей через pipx
+Теперь установим нужные Python-библиотеки. Поскольку pipx предназначен для CLI-инструментов, мы будем использовать pipx install --include-deps для создания изолированных сред, но также зайдём в окружение для запуска твоего приложения вручную.
+pipx install flask --include-deps
+pipx install psycopg2-binary --include-deps
+pipx install pyserial --include-deps
+pipx install pywebview --include-deps
+
+✅ 5. Проверка доступа к Arduino( для определния порта ардуино )
+ls /dev/ttyACM*
+Если виден порт вроде /dev/ttyACM0, то всё хорошо.
+
+✅ 6. Разрешение доступа к USB-порту
+sudo usermod -aG dialout $USER
+
+ После этого обязательно перезагрузить Raspberry Pi:
+
+bash
+Копировать
+Редактировать
+sudo reboot
+✅ 7. Создание запускаемого скрипта
+Создай файл start_app.sh рядом с app.py:
+
+nano start_app.sh
+Вставь туда:
+
+#!/bin/bash
+
+# Переходим в папку проекта
+cd "$(dirname "$0")"
+
+# Запускаем Python напрямую из pipx окружения Flask (если pipx установил flask в ~/.local/pipx/venvs/flask/)
+~/.local/pipx/venvs/flask/bin/python3 app.py
+Сохрани (Ctrl+O, затем Ctrl+X) и сделай исполняемым:
+
+
+chmod +x start_app.sh
+✅ 8. Запуск проекта
+
+./start_app.sh
+✅ 9. [Опционально] Автозапуск с systemd
+Если хочешь, чтобы проект запускался при старте Raspberry Pi:
+
+Создай файл:
+
+
+sudo nano /etc/systemd/system/smartcart.service
+Вставь:
+
+[Unit]
+Description=SmartCart Flask App
+After=network.target
+
+[Service]
+ExecStart=/home/pi/your_project_folder/start_app.sh
+WorkingDirectory=/home/pi/your_project_folder
+Restart=always
+User=pi
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
+
+Замени /home/pi/your_project_folder на путь до папки с app.py.
+
+Активируй сервис:
+
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl enable smartcart.service
+sudo systemctl start smartcart.service

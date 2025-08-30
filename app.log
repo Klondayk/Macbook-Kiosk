@@ -1,0 +1,1 @@
+2025-02-18 13:51:04 ERROR: Ошибка при подключении к Arduino: [Errno 2] could not open port /dev/ttyAMA1: [Errno 2] No such file or directory: '/dev/ttyAMA1'
